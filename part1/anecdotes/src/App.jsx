@@ -17,7 +17,6 @@ const App = () => {
 
   const handleSelect = () => {
     const randomNumber = Math.floor(Math.random() * (0 + 8) + 0);
-    console.log(randomNumber);
     setSelected(randomNumber)
   };
 
@@ -29,10 +28,14 @@ const App = () => {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
-      <p>has {votes[selected]} votes</p>
+      <p>Has {votes[selected]} votes</p>
       <button onClick={handleSelect}>next anecdote</button>
       <button onClick={handleVotes}>vote</button>
+      <h2>Anecdote with most votes</h2>
+      <p>{anecdotes[votes.indexOf(Math.max(...votes))]}</p>
+      <p>Has {Math.max(...votes)} votes</p>
     </div>
   );
 };
