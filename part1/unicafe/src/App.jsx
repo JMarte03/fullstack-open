@@ -1,6 +1,11 @@
 import { useState } from "react";
 
 const Statistics = ({ good, neutral, bad, collected, average }) => {
+  if (collected(good, neutral, bad) == 0){
+    return (
+      <p>No feedback given</p>
+    )
+  }
   return (
     <>
       <h2>statistics</h2>
