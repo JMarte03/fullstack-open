@@ -2,7 +2,7 @@ import React from "react";
 
 // Renders the course name
 const Header = ({ text }) => {
-  return <h1>{text}</h1>;
+  return <h2>{text}</h2>;
 };
 
 // Renders the course details (maps through the parts)
