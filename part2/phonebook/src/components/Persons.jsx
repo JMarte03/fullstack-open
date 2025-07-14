@@ -1,18 +1,29 @@
 import React from 'react'
 
-const Person = ({name, phone}) => {
-    return <p>{name} {phone}</p>
+const Button = ({ onClickDelete }) => {
+  return <button onClick={onClickDelete}>delete</button>
 }
 
-const Persons = ({filterExists, filteredPersons, persons}) => {
+const Person = ({id, name, phone, onClickDelete}) => {
+    return (
+      <>
+        <div>
+          {name} {phone} <Button onClickDelete={() => onClickDelete(id)} />
+        </div>
+        <br />
+      </>
+    )
+}
+
+const Persons = ({filterExists, filteredPersons, persons, onClickDelete}) => {
   return (
     <div>
         {filterExists
           ? filteredPersons.map((person) => (
-              <Person key={person.id} name={person.name} phone={person.phone} />
+              <Person key={person.id} id={person.id} name={person.name} phone={person.phone} onClickDelete={onClickDelete} />
             ))
           : persons.map((person) => (
-              <Person key={person.id} name={person.name} phone={person.phone} />
+              <Person key={person.id} id={person.id} name={person.name} phone={person.phone} onClickDelete={onClickDelete} />
             ))
         }
     </div>

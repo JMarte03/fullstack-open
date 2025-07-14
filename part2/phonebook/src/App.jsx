@@ -52,8 +52,16 @@ function App() {
   const filteredPersons = persons.filter((person) =>
     person.name.toLowerCase().includes(filter.toLowerCase())
   );
-  console.log(filteredPersons);
-  console.log(filterExists);
+
+  const deletePerson = (id) => {
+    const personToDelete = persons.find(p => p.id === id)
+    if (window.confirm(`Delete ${personToDelete.name}?`)){
+      personService
+        .erase(id)
+        .then(setPersons(persons.filter(p => p.id !== id)))
+    }
+    
+  }
 
   return (
     <div>
@@ -76,6 +84,7 @@ function App() {
         filterExists={filterExists}
         filteredPersons={filteredPersons}
         persons={persons}
+        onClickDelete={deletePerson}
       />
     </div>
   );
