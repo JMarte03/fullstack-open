@@ -2,7 +2,7 @@
   "persons": [
     {
       "name": "Arto Hellas",
-      "phone": "2768234",
+      "phone": "287656",
       "id": "1"
     },
     {
@@ -42,8 +42,13 @@
     },
     {
       "name": "Thomas Alva Edison",
-      "phone": "28364837892340549",
+      "phone": "123-2340",
       "id": "9"
+    },
+    {
+      "id": "a586",
+      "name": "Harry Styles",
+      "phone": "98768765"
     }
   ]
 }
