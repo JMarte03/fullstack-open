@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import Country from './components/Country'
+import CountriesList from './components/CountriesList'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("")
   const [filteredCountries, setFilteredCountries] = useState([])
   const [countries, setCountries] = useState([])
+  const [showCountry, setShowCountry] = useState(false)
  
-  useEffect (() => {
+  useEffect(() => {
      axios
         .get('https://studies.cs.helsinki.fi/restcountries/api/all')
         .then(response => {
@@ -24,6 +27,12 @@ function App() {
   const handleChange = (event) => {
     setSearchQuery(event.target.value)
   }
+
+  const handleShowCountry = () => {
+    const newState = !showCountry
+    setShowCountry(newState)
+    console.log(showCountry);
+  }
   
   const filterExists = searchQuery === "" ? false : true;
   
@@ -35,32 +44,20 @@ function App() {
           <p>Too many matches, specify another filter</p>
         ) 
       )}
-      <ul>
         {filterExists && (
           filteredCountries.length > 1 && filteredCountries.length <= 10 && (
-            filteredCountries.map(country => (
-              <li key={country.name.common}>{country.name.common}</li>
-            ))
+            <CountriesList 
+              countries={filteredCountries} 
+              handleShowCountry={handleShowCountry}
+              showCountry={showCountry}
+            />
           ) 
         )}
-      </ul>
       {filterExists && (
         filteredCountries.length === 1 && (
-          <div>
-            <h1>{filteredCountries[0].name.common}</h1>
-            <p>Capital {filteredCountries[0].capital[0]}</p>
-            <p>Area {filteredCountries[0].area}</p>
-            <h2>Languages</h2>
-            <ul>
-              {Object.values(filteredCountries[0].languages).map((value, index) => (
-                <li key={index}>{value}</li>
-              ))}
-            </ul>
-            <img 
-              src={filteredCountries[0].flags.png} 
-              alt={filteredCountries[0].flags.alt} 
-            />
-          </div>        
+          <Country 
+             countryInfo={filteredCountries[0]} 
+          />     
         ) 
       )}
     </div>
