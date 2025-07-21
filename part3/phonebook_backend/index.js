@@ -50,6 +50,19 @@ app.get('/api/persons/:id', (request, response) => {
 
 app.post('/api/persons', (request, response) => {
     const body = request.body
+    const name = persons.find(p => p.name === body.name)
+
+    if (!body.name || !body.number){
+        return response.status(400).json({
+            error: 'Must include a name and a phone number'
+        })
+    } 
+    else if (name) {
+        return response.status(400).json({
+            error: 'Name must be unique'
+        })
+    }
+
     const person = {
         id: generateId(),
         name: body.name,
