@@ -9,5 +9,8 @@
   },
   "author": "Jesimiel Marte",
   "license": "MIT",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "morgan": "^1.10.1"
+  }
 }
